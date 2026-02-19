@@ -1,0 +1,19 @@
+[
+    {
+        "name": "liver_disorders",
+        "id": 60,
+        "batch_size": 32
+    },
+
+    {
+        "name": "heart_disease",
+        "id": 45,
+        "batch_size": 32
+    },
+
+    {
+        "name": "chronic_kidney_disease",
+        "id": 336,
+        "batch_size": 32
+    }
+]

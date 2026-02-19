@@ -1,15 +1,15 @@
-#pip install ucimlrepo
-from ucimlrepo import fetch_ucirepo 
+import torch
+import torch.nn as nn 
 
-# fetch dataset 
-chronic_kidney_disease = fetch_ucirepo(id=336) 
-  
-# data (as pandas dataframes) 
-X = chronic_kidney_disease.data.features 
-y = chronic_kidney_disease.data.targets 
-  
-# metadata 
-print(chronic_kidney_disease.metadata) 
-  
-# variable information 
-print(chronic_kidney_disease.variables) 
+from torch.optim import Adam
+
+class ChronicKidneyDiseaseModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self):
+        pass
+    def train_model(self):
+        pass
+    def evaluate(self):
+        pass

@@ -1,15 +1,15 @@
-#pip install ucimlrepo
-from ucimlrepo import fetch_ucirepo 
-  
-# fetch dataset 
-heart_disease = fetch_ucirepo(id=45) 
-  
-# data (as pandas dataframes) 
-X = heart_disease.data.features 
-y = heart_disease.data.targets 
-  
-# metadata 
-print(heart_disease.metadata) 
-  
-# variable information 
-print(heart_disease.variables) 
+import torch
+import torch.nn as nn 
+
+from torch.optim import Adam
+
+class HeartDiseaseModel(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self):
+        pass
+    def train_model(self):
+        pass
+    def evaluate(self):
+        pass
