@@ -15,7 +15,11 @@ import json
 
 
 def main():
-    pass
+    with open("./src/data/csv_data.json", "r") as f:
+        csv_data = json.load(f)
+
+    for dataset in csv_data:
+        print(dataset["name"], dataset["path"])
     #have diff func for each model and dataload. then combine at the end in main
 
 if __name__ == '__main__':
