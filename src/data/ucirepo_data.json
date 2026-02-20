@@ -2,18 +2,24 @@
     {
         "name": "liver_disorders",
         "id": 60,
+        "type": "regression",
+        "discrete": "Y",
         "batch_size": 32
     },
 
     {
         "name": "heart_disease",
         "id": 45,
+        "type": "regression",
+        "discrete": "N",
         "batch_size": 32
     },
 
     {
         "name": "chronic_kidney_disease",
         "id": 336,
+        "type": "classification",
+        "discrete": "Y",
         "batch_size": 32
     }
 ]

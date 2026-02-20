@@ -3,17 +3,16 @@ import torch.nn as nn
 
 from torch.optim import Adam
 
-#target is drinks: number of haf-pint equivalents of alchol per day
-class LiverDisorderModel(nn.Module):
-    def __init__(self, input_size):
+class SmallMLPClassification(nn.Module):
+    def __init__(self, input_size, num_classes):
         super().__init__()
 
         self.model = nn.Sequential(
             nn.Linear(input_size, 64),
             nn.ReLU(),
-            nn.Linear(64, 16),
+            nn.Linear(64, 32),
             nn.ReLU(),
-            nn.Linear(16, 1)
+            nn.Linear(32, num_classes)
         )
 
         self.optimizer = Adam(self.parameters(), lr=0.001)
