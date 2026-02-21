@@ -1,12 +1,12 @@
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 
-def decision_tree_model(X_train, y_train):
-    dt = DecisionTreeClassifier()
-    dt.fit(X_train, y_train)
-    return dt
+def decision_tree_classifier(X_train, y_train):
+    dtc = DecisionTreeClassifier(random_state=42)
+    dtc.fit(X_train, y_train)
+    return dtc
 
-def random_tree_model(X_train, y_train):
-    rf = RandomForestClassifier(n_estimators=100)
-    rf.fit(X_train, y_train)
-    return rf
+def decision_tree_regressor(X_train, y_train):
+    dtr = DecisionTreeRegressor(random_state=42)
+    dtr.fit(X_train, y_train)
+
+    return dtr
