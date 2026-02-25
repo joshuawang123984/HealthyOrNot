@@ -1,6 +1,8 @@
 [
     {
         "name": "cancer",
-        "path": "../input/cancer.csv"
+        "path": "../input/cancer.csv",
+        "task": "",
+        "target_col": ""
     }
 ]

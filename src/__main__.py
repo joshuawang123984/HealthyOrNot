@@ -16,6 +16,8 @@ from sklearn.model_selection import train_test_split
 
 
 def main():
+    
+    #can separate this open to a function. have a map of each dataset type to a tuple of attributes to make this pattern work
     with open("./src/data/csv_data.json", "r") as f:
         csv_data = json.load(f)
 
@@ -31,6 +33,11 @@ def main():
 
         print(f"Best model for {dataset['name']}: {best_model}")
     #have diff func for each model and dataload. then combine at the end in main
+    
+    with open("./src/data/kaggle_data.json", "r") as f:
+        pass
+    with open("./src/data/ucirepo_data.json", "r") as f:
+        pass
 
 def run_classification(X_train, X_test, y_train, y_test):
     models = {
