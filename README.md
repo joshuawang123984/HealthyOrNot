@@ -31,16 +31,6 @@ We implemented a preprocessing pipeline that:
 
 The backend then returned structured health insights to the frontend, where results were displayed in an interactive and user-friendly format.
 
-## 🚧 Challenges we ran into
-
-
-
-## ✔️ Accomplishments that we're proud of
-
-
-## 📚 What we learned
-
-
 ## 🔭 What's next for HealthyOrNot
 
 HealthyOrNot would like to be able to produce graphs that display significant health indicators and the statistics of where one should lie. The graph should also include the individual persons own health indicator statistics.
