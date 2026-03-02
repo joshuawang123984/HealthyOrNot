@@ -1,3 +1,7 @@
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from data.ToDataloader_numeric import ucirepo_to_df, csv_to_df, xy_to_dataloader
 from models.FeatureSelectionRegressionModels import ridge_model, lasso_model
 from models.LinearRegression import LinearRegression
@@ -18,7 +22,7 @@ from sklearn.model_selection import train_test_split
 def main():
     
     #can separate this open to a function. have a map of each dataset type to a tuple of attributes to make this pattern work
-    with open("./src/data/csv_data.json", "r") as f:
+    with open("./data/csv_data.json", "r") as f:
         csv_data = json.load(f)
 
     for dataset in csv_data:
@@ -26,17 +30,19 @@ def main():
         X, y = df_to_xy(df, target_col=dataset["target_col"])
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-        if dataset["task"] == "classification":
+        if dataset["task"].lower() == "classification":
             best_model = run_classification(X_train, X_test, y_train, y_test)
-        elif dataset["task"] == "regression":
-            best_model = run_regression(X_train, X_test, y_train, y_test)
 
+        #its regression
+        else:
+            best_model = run_regression(X_train, X_test, y_train, y_test)
+            
         print(f"Best model for {dataset['name']}: {best_model}")
     #have diff func for each model and dataload. then combine at the end in main
     
-    with open("./src/data/kaggle_data.json", "r") as f:
+    with open("./data/kaggle_data.json", "r") as f:
         pass
-    with open("./src/data/ucirepo_data.json", "r") as f:
+    with open("./data/ucirepo_data.json", "r") as f:
         pass
 
 def run_classification(X_train, X_test, y_train, y_test):
@@ -63,8 +69,10 @@ def run_classification(X_train, X_test, y_train, y_test):
 def run_regression(X_train, X_test, y_train, y_test):
     models = {
         "linear": LinearRegression(X_train, y_train),
-        "ridge": ridge_model(X_train, y_train),
-        "lasso": lasso_model(X_train, y_train),
+        #will have to give these multiple alpha values in a list alphas, that contain a range
+        "ridge": ridge_model(X_train, y_train, 0.01),
+        "lasso": lasso_model(X_train, y_train, 0.01),
+
         "decision_tree": decision_tree_regressor(X_train, y_train),
         "random_forest": random_forest_regressor_model(X_train, y_train),
         "svr": SVR_model(X_train, y_train),

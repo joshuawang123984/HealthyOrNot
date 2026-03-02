@@ -1,0 +1,8 @@
+[
+    {
+        "name": "cancer",
+        "path": "./data/cancer.csv",
+        "task": "Classification",
+        "target_col": "target"
+    }
+]
