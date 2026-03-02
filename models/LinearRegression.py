@@ -10,12 +10,12 @@ class LinearRegressionModel(nn.Module):
         return self.linear(x)
 
 class LinearRegression:
-    def __init__(self, X_train, y_train, epochs=10000, lr=0.0001):
+    def __init__(self, X_train, y_train, alpha, epochs=10000, lr=0.0001, lasso=False, ridge=False):
         input_dim = X_train.shape[1]
         self.model = LinearRegressionModel(input_dim)
-        self.fit(X_train, y_train, epochs, lr)
+        self.fit(X_train, y_train, alpha, epochs, lr, lasso, ridge)
     
-    def fit(self, X_train, y_train, epochs, lr):
+    def fit(self, X_train, y_train, alpha, epochs, lr, lasso=False, ridge=False):
         X = torch.tensor(X_train.values if hasattr(X_train, 'values') else X_train, dtype=torch.float32)
         y = torch.tensor(y_train.values if hasattr(y_train, 'values') else y_train, dtype=torch.float32).squeeze().unsqueeze(1)
 
@@ -29,7 +29,13 @@ class LinearRegression:
         for _ in range(epochs):
             self.model.train()
             optimizer.zero_grad()
+
             loss = loss_fn(self.model(X), y)
+            if lasso:
+                loss += alpha * sum(torch.sum(torch.abs(p)) for p in self.model.parameters())
+            elif ridge:
+                loss += alpha * sum(torch.sum((p ** 2) for p in self.model.parameters()))
+
             loss.backward()
             optimizer.step()
     

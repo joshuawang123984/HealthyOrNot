@@ -3,7 +3,6 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from data.ToDataloader_numeric import ucirepo_to_df, csv_to_df, xy_to_dataloader
-from models.FeatureSelectionRegressionModels import ridge_model, lasso_model
 from models.LinearRegression import LinearRegression
 from models.LogisticRegression import LogisticReg
 from models.RandomForest import random_forest_regressor_model, random_forest_classifier_model
@@ -69,10 +68,9 @@ def run_classification(X_train, X_test, y_train, y_test):
 def run_regression(X_train, X_test, y_train, y_test):
     models = {
         "linear": LinearRegression(X_train, y_train),
-        #will have to give these multiple alpha values in a list alphas, that contain a range
-        "ridge": ridge_model(X_train, y_train, 0.01),
-        "lasso": lasso_model(X_train, y_train, 0.01),
-
+        #have to experiment with multiple alpha vals, create a lsit and go thru each maybe, but make diff exp eg: 0.001, 0.01, 0.1
+        "ridge": LinearRegression(X_train, y_train, 0.01, ridge=True),
+        "lasso": LinearRegression(X_train, y_train, 0.01, lasso=True),
         "decision_tree": decision_tree_regressor(X_train, y_train),
         "random_forest": random_forest_regressor_model(X_train, y_train),
         "svr": SVR_model(X_train, y_train),
