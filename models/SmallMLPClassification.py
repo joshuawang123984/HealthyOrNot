@@ -16,7 +16,7 @@ class SmallMLPClassification(nn.Module):
         )
 
         self.optimizer = Adam(self.parameters(), lr=0.001)
-        self.criterion = nn.MSELoss()
+        self.criterion = nn.CrossEntropyLoss()
 
     def forward(self, input):
         return self.model(input)

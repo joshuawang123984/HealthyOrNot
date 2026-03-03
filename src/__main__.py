@@ -10,7 +10,7 @@ from models.SmallMLPClassification import SmallMLPClassification
 from models.SmallMLPRegression import SmallMLPRegression
 from models.SVModels import SVR_model, SVC_model
 from models.TreeModels import decision_tree_classifier, decision_tree_regressor
-from models.KNN import knn_classifier
+from models.KNN import KNN
 
 from data.ToDataloader_numeric import ucirepo_to_df, csv_to_df, kaggle_download_to_df, df_to_xy
 
@@ -46,7 +46,7 @@ def main():
 
 def run_classification(X_train, X_test, y_train, y_test):
     models = {
-        "knn": knn_classifier(X_train, y_train),
+        "knn": KNN(X_train, y_train),
         "logistic": LogisticReg(X_train, y_train),
         "decision_tree": decision_tree_classifier(X_train, y_train),
         "random_forest": random_forest_classifier_model(X_train, y_train),
