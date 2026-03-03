@@ -43,7 +43,7 @@ def kaggle_download_to_df(path, filename=None):
 
 def df_to_xy(df, target_col):
     X = df.drop(columns=[target_col])
-    y = df[[target_col]]
+    y = df[target_col]
     return X, y
 
 #transforms to float32, so categorical may not work

@@ -10,7 +10,7 @@ class LinearRegressionModel(nn.Module):
         return self.linear(x)
 
 class LinearRegression:
-    def __init__(self, X_train, y_train, alpha, epochs=10000, lr=0.0001, lasso=False, ridge=False):
+    def __init__(self, X_train, y_train, alpha, epochs=1000, lr=0.01, lasso=False, ridge=False):
         input_dim = X_train.shape[1]
         self.model = LinearRegressionModel(input_dim)
         self.fit(X_train, y_train, alpha, epochs, lr, lasso, ridge)

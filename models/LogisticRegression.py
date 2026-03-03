@@ -10,9 +10,9 @@ class LogisticRegModel(nn.Module):
         return self.linear(x)
 
 class LogisticReg:
-    def __init__(self, X_train, y_train, epochs=10000, lr=0.0001):
+    def __init__(self, X_train, y_train, epochs=1000, lr=0.01):
         input_dim = X_train.shape[1]
-        num_classes = len(y_train.unique() if hasattr(y_train, 'unique') else torch.unique(torch.tensor(y_train.values)))
+        num_classes = len(y_train.unique() if hasattr(y_train, 'unique') else torch.unique(torch.tensor(y_train)))
         self.model = LogisticRegModel(input_dim, num_classes)
         self.fit(X_train, y_train, epochs, lr)
 
