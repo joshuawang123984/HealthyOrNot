@@ -27,13 +27,17 @@ def main():
         X, y = df_to_xy(df, target_col=dataset["target_col"])
 
         if dataset["task"].lower() == "classification":
-            best_model = run_classification(X, y)
+            best_name, best_model = run_classification(X, y)
 
         #its regression
         else:
-            best_model = run_regression(X, y)
+            best_name, best_model = run_regression(X, y)
             
-        print(f"Best model for {dataset['name']}: {best_model}")
+        print(f"Best model for {dataset['name']}: {best_name}")
+        predictions = best_model.predict(X)
+        print(predictions[0])
+        print(predictions[19])
+        print(predictions[20])
     #have diff func for each model and dataload. then combine at the end in main
     
     with open("./data/kaggle_data.json", "r") as f:
@@ -83,7 +87,8 @@ def run_classification(X, y):
             best_name = name
 
     print(f"\nBest: {best_name} ({best_score:.4f})")
-    return best_name
+    best_model = models[best_name](X,y)
+    return best_name, best_model
 
 def run_regression(X, y):
     models = {
@@ -106,7 +111,8 @@ def run_regression(X, y):
             best_name = name
 
     print(f"\nBest: {best_name} ({best_score:.4f})")
-    return best_name
+    best_model = models[best_name](X,y)
+    return best_name, best_model
 
 if __name__ == '__main__':
     main()

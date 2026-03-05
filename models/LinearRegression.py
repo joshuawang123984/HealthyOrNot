@@ -54,3 +54,10 @@ class LinearRegression:
 
         r_squared = (1 - (SS_res / SS_tot)).item()
         return r_squared
+    
+    def predict(self, X):
+        X = torch.tensor(X.values if hasattr(X, 'values') else X, dtype=torch.float32)
+        X = (X - self.X_mean) / self.X_std
+        self.model.eval()
+        with torch.no_grad():
+            return self.model(X).squeeze().numpy()

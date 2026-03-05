@@ -47,3 +47,12 @@ class LogisticReg:
         
         accuracy = (predicted_classes == y).float().mean().item()
         return accuracy
+    
+    def predict(self, X):
+        X = torch.tensor(X.values if hasattr(X, 'values') else X, dtype=torch.float32)
+        X = (X - self.X_mean) / self.X_std
+        self.model.eval()
+        
+        with torch.no_grad():
+            output = self.model(X)
+        return torch.argmax(output, dim=1).numpy()  # for classification

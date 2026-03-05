@@ -5,6 +5,7 @@ class KNN:
         self.k = k
         self.X_train = torch.tensor(X_train.values if hasattr(X_train, 'values') else X_train, dtype=torch.float32)
         self.y_train = torch.tensor(y_train.values if hasattr(y_train, 'values') else y_train, dtype=torch.float32).squeeze()
+    
     def predict(self, X_test):
         X = torch.tensor(X_test.values if hasattr(X_test, 'values') else X_test, dtype=torch.float32)
 

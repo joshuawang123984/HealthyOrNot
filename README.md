@@ -35,3 +35,6 @@ The backend then returned structured health insights to the frontend, where resu
 
 HealthyOrNot would like to be able to produce graphs that display significant health indicators and the statistics of where one should lie. The graph should also include the individual persons own health indicator statistics.
 
+
+confidence intervals
+correlation analysis
