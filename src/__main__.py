@@ -45,7 +45,7 @@ def main():
     with open("./data/ucirepo_data.json", "r") as f:
         pass
 
-def cross_validate(X, y, models, model, k):
+def cross_validate(X, y, model_fn, k):
     X = np.array_split(X, k)
     y = np.array_split(y, k)
     scores = []
@@ -54,10 +54,10 @@ def cross_validate(X, y, models, model, k):
         X_test = X[i]
         y_test = y[i]
 
-        X_train = np.concat([X[j] for j in range(k) if j != i])
-        y_train = np.concat([y[j] for j in range(k) if j != i])
+        X_train = np.concatenate([X[j] for j in range(k) if j != i])
+        y_train = np.concatenate([y[j] for j in range(k) if j != i])
 
-        target_model = models[model](X_train, y_train)
+        target_model = model_fn(X_train, y_train)
         score = target_model.score(X_test, y_test)
 
         scores.append(score)
@@ -77,9 +77,10 @@ def run_classification(X, y):
         "svc": lambda X, y: SVC_model(X, y),
     }
 
-    best_name, best_score = None, -1
-    for name, _ in models.items():
-        score_mean, score_std = cross_validate(X, y, models, name, k=5)
+    best_name, best_score = None, -float('inf')
+    for name, model_fn in models.items():
+        score_mean, score_std = cross_validate(X, y, model_fn, k=5)
+        # score_mean, score_std = cross_validate(X, y, models, name, k=5)
         print(f"{name}: {score_mean:.4f} +- {score_std:.4f}")
 
         if score_mean > best_score:
@@ -101,9 +102,10 @@ def run_regression(X, y):
         "svr": lambda X, y: SVR_model(X, y),
     }
 
-    best_name, best_score = None, -1
-    for name, _ in models.items():
-        score_mean, score_std = cross_validate(X, y, models, name, k=5)
+    best_name, best_score = None, -float('inf')
+    for name, model_fn in models.items():
+        score_mean, score_std = cross_validate(X, y, model_fn, k=5)
+        # score_mean, score_std = cross_validate(X, y, models, name, k=5)
         print(f"{name}: {score_mean:.4f} +- {score_std:.4f}")
         
         if score_mean > best_score:

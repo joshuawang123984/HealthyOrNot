@@ -2,24 +2,78 @@
     {
         "name": "liver_disorders",
         "id": 60,
-        "type": "regression",
-        "discrete": "Y",
+        "task": "regression",
+        "target_col": "drinks",
+        "target_desc": "number of half-pint equivalents of alcoholic beverages drunk per day",
+        "discrete": "N",
+        "features": [
+            "mcv",
+            "alkphos",
+            "sgpt",
+            "sgot",
+            "gammagt"
+        ],
+        "num_of_features": 5,
         "batch_size": 32
     },
-
     {
         "name": "heart_disease",
         "id": 45,
-        "type": "regression",
-        "discrete": "N",
+        "task": "regression",
+        "target_col": "num",
+        "target_desc": "diagnosis of heart disease",
+        "discrete": "Y",
+        "features": [
+            "age",
+            "sex",
+            "cp",
+            "trestbps",
+            "chol",
+            "fbs",
+            "restecg",
+            "thalach",
+            "exang",
+            "oldpeak",
+            "slope",
+            "ca",
+            "thal"
+        ],
+        "num_of_features": 13,
         "batch_size": 32
     },
-
     {
         "name": "chronic_kidney_disease",
         "id": 336,
-        "type": "classification",
+        "task": "Classification",
+        "target_col": "class",
         "discrete": "Y",
+        "features": [
+            "age",
+            "bp",
+            "sg",
+            "al",
+            "su",
+            "rbc",
+            "pc",
+            "pcc",
+            "ba",
+            "bgr",
+            "bu",
+            "sc",
+            "sod",
+            "pot",
+            "hemo",
+            "pcv",
+            "wbcc",
+            "rbcc",
+            "htn",
+            "dm",
+            "cad",
+            "appet",
+            "pe",
+            "ane"
+        ],
+        "num_of_features": 24,
         "batch_size": 32
     }
 ]
