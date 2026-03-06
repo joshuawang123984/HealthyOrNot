@@ -3,8 +3,9 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import numpy as np
+import pandas as pd
 
-from data.ToDataloader_numeric import ucirepo_to_df, csv_to_df, kaggle_download_to_df, df_to_xy
+from data.ToDataloader_numeric import ucirepo_to_df, csv_to_df, df_to_xy
 from models.LinearRegression import LinearRegression
 from models.LogisticRegression import LogisticReg
 from models.RandomForest import random_forest_regressor_model, random_forest_classifier_model
@@ -16,34 +17,50 @@ from models.KNN import KNN
 
 import json
 
+def process_dataset(dataset, X, y):
+    if dataset["task"].lower() == "classification":
+        best_name, best_model = run_classification(X, y)
+    else:
+        best_name, best_model = run_regression(X, y)
+
+    print(f"Best model for {dataset['name']}: {best_name}")
+    predictions = best_model.predict(X)
+    print(predictions[0])
+    print(predictions[19])
+    print(predictions[20])
+
 def main():
-    
-    #can separate this open to a function. have a map of each dataset type to a tuple of attributes to make this pattern work
     with open("./data/csv_data.json", "r") as f:
         csv_data = json.load(f)
 
     for dataset in csv_data:
         df = csv_to_df(dataset["path"])
+        if dataset.get("sample"):
+            df = df.sample(n=dataset["sample"], random_state=42)
         X, y = df_to_xy(df, target_col=dataset["target_col"])
+        process_dataset(dataset, X, y)
+        
 
-        if dataset["task"].lower() == "classification":
-            best_name, best_model = run_classification(X, y)
-
-        #its regression
-        else:
-            best_name, best_model = run_regression(X, y)
-            
-        print(f"Best model for {dataset['name']}: {best_name}")
-        predictions = best_model.predict(X)
-        print(predictions[0])
-        print(predictions[19])
-        print(predictions[20])
-    #have diff func for each model and dataload. then combine at the end in main
-    
-    with open("./data/kaggle_data.json", "r") as f:
-        pass
     with open("./data/ucirepo_data.json", "r") as f:
-        pass
+        ucirepo_data = json.load(f)
+
+    for dataset in ucirepo_data:
+        X, y = ucirepo_to_df(dataset["id"])
+        X = X.dropna()
+        y = y.loc[X.index]
+
+        if "mappings" in dataset:
+            for col, mapping in dataset["mappings"].items():
+                X[col] = X[col].map(mapping)
+        
+        if "target_mapping" in dataset:
+            y = y.squeeze().map(dataset["target_mapping"]).to_numpy().astype(np.float32)
+        else:
+            y = y.to_numpy().astype(np.float32).squeeze()
+
+       
+        print(f"{dataset['name']}: X shape={X.shape}, y shape={y.shape}")
+        process_dataset(dataset, X, y)
 
 def cross_validate(X, y, model_fn, k):
     X = np.array_split(X, k)
@@ -80,7 +97,7 @@ def run_classification(X, y):
     best_name, best_score = None, -float('inf')
     for name, model_fn in models.items():
         score_mean, score_std = cross_validate(X, y, model_fn, k=5)
-        # score_mean, score_std = cross_validate(X, y, models, name, k=5)
+
         print(f"{name}: {score_mean:.4f} +- {score_std:.4f}")
 
         if score_mean > best_score:
@@ -105,7 +122,7 @@ def run_regression(X, y):
     best_name, best_score = None, -float('inf')
     for name, model_fn in models.items():
         score_mean, score_std = cross_validate(X, y, model_fn, k=5)
-        # score_mean, score_std = cross_validate(X, y, models, name, k=5)
+
         print(f"{name}: {score_mean:.4f} +- {score_std:.4f}")
         
         if score_mean > best_score:

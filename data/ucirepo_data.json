@@ -73,6 +73,52 @@
             "pe",
             "ane"
         ],
+        "target_mapping": {
+            "ckd": 1,
+            "notckd": 0
+        },
+        "mappings": {
+            "rbc": {
+                "normal": 0,
+                "abnormal": 1
+            },
+            "pc": {
+                "normal": 0,
+                "abnormal": 1
+            },
+            "pcc": {
+                "notpresent": 0,
+                "present": 1
+            },
+            "ba": {
+                "notpresent": 0,
+                "present": 1
+            },
+            "htn": {
+                "no": 0,
+                "yes": 1
+            },
+            "dm": {
+                "no": 0,
+                "yes": 1
+            },
+            "cad": {
+                "no": 0,
+                "yes": 1
+            },
+            "appet": {
+                "poor": 0,
+                "good": 1
+            },
+            "pe": {
+                "no": 0,
+                "yes": 1
+            },
+            "ane": {
+                "no": 0,
+                "yes": 1
+            }
+        },
         "num_of_features": 24,
         "batch_size": 32
     }

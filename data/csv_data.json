@@ -4,7 +4,7 @@
         "path": "./data/cancer.csv",
         "task": "Classification",
         "target_col": "target",
-        "target_desc": "0 for no, 1 for yes",
+        "target_desc": "0 for benign, 1 for malignant",
         "features": [
             "mean radius",
             "mean texture",
@@ -39,5 +39,38 @@
         ],
         "num_of_features": 30,
         "batch_size": 32
+    },
+    {
+        "name": "diabetes_data",
+        "path": "./data/diabetes.csv",
+        "task": "classification",
+        "target_col": "Diabetes_012",
+        "target_desc": "0 is for no diabetes or only during pregnancy, 1 is for prediabetes, and 2 is for diabetes",
+        "features": [
+            "HighBP",
+            "HighChol",
+            "CholCheck",
+            "BMI",
+            "Smoker",
+            "Stroke",
+            "HeartDiseaseorAttack",
+            "PhysActivity",
+            "Fruits",
+            "Veggies",
+            "HvyAlcoholConsump",
+            "AnyHealthcare",
+            "NoDocbcCost",
+            "GenHlth",
+            "MentHlth",
+            "PhysHlth",
+            "DiffWalk",
+            "Sex",
+            "Age",
+            "Education",
+            "Income"
+        ],
+        "num_of_features": 21,
+        "batch_size": 32,
+        "sample": 10000
     }
 ]

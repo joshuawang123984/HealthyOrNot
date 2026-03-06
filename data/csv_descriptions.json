@@ -1,0 +1,210 @@
+{
+    "cancer": {
+        "mean radius": {
+            "description": "mean of distances from center to points on the perimeter",
+            "type": "continuous"
+        },
+        "mean texture": {
+            "description": "mean of standard deviation of gray-scale values",
+            "type": "continuous"
+        },
+        "mean perimeter": {
+            "description": "mean perimeter of the cell nucleus",
+            "type": "continuous"
+        },
+        "mean area": {
+            "description": "mean area of the cell nucleus",
+            "type": "continuous"
+        },
+        "mean smoothness": {
+            "description": "mean of local variation in radius lengths",
+            "type": "continuous"
+        },
+        "mean compactness": {
+            "description": "mean of (perimeter^2 / area - 1.0)",
+            "type": "continuous"
+        },
+        "mean concavity": {
+            "description": "mean of severity of concave portions of the contour",
+            "type": "continuous"
+        },
+        "mean concave points": {
+            "description": "mean of number of concave portions of the contour",
+            "type": "continuous"
+        },
+        "mean symmetry": {
+            "description": "mean symmetry of the cell nucleus",
+            "type": "continuous"
+        },
+        "mean fractal dimension": {
+            "description": "mean of coastline approximation minus 1",
+            "type": "continuous"
+        },
+        "radius error": {
+            "description": "standard error of distances from center to points on the perimeter",
+            "type": "continuous"
+        },
+        "texture error": {
+            "description": "standard error of gray-scale values",
+            "type": "continuous"
+        },
+        "perimeter error": {
+            "description": "standard error of the cell nucleus perimeter",
+            "type": "continuous"
+        },
+        "area error": {
+            "description": "standard error of the cell nucleus area",
+            "type": "continuous"
+        },
+        "smoothness error": {
+            "description": "standard error of local variation in radius lengths",
+            "type": "continuous"
+        },
+        "compactness error": {
+            "description": "standard error of (perimeter^2 / area - 1.0)",
+            "type": "continuous"
+        },
+        "concavity error": {
+            "description": "standard error of severity of concave portions of the contour",
+            "type": "continuous"
+        },
+        "concave points error": {
+            "description": "standard error of number of concave portions of the contour",
+            "type": "continuous"
+        },
+        "symmetry error": {
+            "description": "standard error of symmetry of the cell nucleus",
+            "type": "continuous"
+        },
+        "fractal dimension error": {
+            "description": "standard error of coastline approximation minus 1",
+            "type": "continuous"
+        },
+        "worst radius": {
+            "description": "largest mean value of distances from center to points on the perimeter",
+            "type": "continuous"
+        },
+        "worst texture": {
+            "description": "largest mean value of standard deviation of gray-scale values",
+            "type": "continuous"
+        },
+        "worst perimeter": {
+            "description": "largest mean perimeter of the cell nucleus",
+            "type": "continuous"
+        },
+        "worst area": {
+            "description": "largest mean area of the cell nucleus",
+            "type": "continuous"
+        },
+        "worst smoothness": {
+            "description": "largest mean of local variation in radius lengths",
+            "type": "continuous"
+        },
+        "worst compactness": {
+            "description": "largest mean of (perimeter^2 / area - 1.0)",
+            "type": "continuous"
+        },
+        "worst concavity": {
+            "description": "largest mean of severity of concave portions of the contour",
+            "type": "continuous"
+        },
+        "worst concave points": {
+            "description": "largest mean of number of concave portions of the contour",
+            "type": "continuous"
+        },
+        "worst symmetry": {
+            "description": "largest mean symmetry of the cell nucleus",
+            "type": "continuous"
+        },
+        "worst fractal dimension": {
+            "description": "largest mean of coastline approximation minus 1",
+            "type": "continuous"
+        }
+    },
+    "diabetes_data": {
+        "HighBP": {
+            "description": "0 = no high BP 1 = high BP",
+            "type": "binary"
+        },
+        "HighChol": {
+            "description": "0 = no high cholesterol 1 = high cholesterol",
+            "type": "binary"
+        },
+        "CholCheck": {
+            "description": "0 = no cholesterol check in 5 years 1 = yes cholesterol check in 5 years",
+            "type": "binary"
+        },
+        "BMI": {
+            "description": "Body Mass Index",
+            "type": "integer"
+        },
+        "Smoker": {
+            "description": "Have you smoked at least 100 cigarettes in your entire life? [Note: 5 packs = 100 cigarettes] 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "Stroke": {
+            "description": "(Ever told) you had a stroke. 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "HeartDiseaseorAttack": {
+            "description": "coronary heart disease (CHD) or myocardial infarction (MI) 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "PhysActivity": {
+            "description": "physical activity in past 30 days - not including job 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "Fruits": {
+            "description": "Consume Fruit 1 or more times per day 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "Veggies": {
+            "description": "Consume Vegetables 1 or more times per day 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "HvyAlcoholConsump": {
+            "description": "Heavy drinkers (adult men having more than 14 drinks per week and adult women having more than 7 drinks per week",
+            "type": "binary"
+        },
+        "AnyHealthcare": {
+            "description": "Have any kind of health care coverage, including health insurance, prepaid plans such as HMO, etc. 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "NoDocbcCost": {
+            "description": "Was there a time in the past 12 months when you needed to see a doctor but could not because of cost? 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "GenHlth": {
+            "description": "Would you say that in general your health is: scale 1-5 1 = excellent 2 = very good 3 = good 4 = fair 5 = poor",
+            "type": "categorical"
+        },
+        "MentHlth": {
+            "description": "Now thinking about your mental health, which includes stress, depression, and problems with emotions, for how many days during the past 30 days was your mental health not good? scale 1-30 days",
+            "type": "integer"
+        },
+        "PhysHlth": {
+            "description": "Now thinking about your physical health, which includes physical illness and injury, for how many days during the past 30 days was your physical health not good? scale 1-30 days",
+            "type": "integer"
+        },
+        "DiffWalk": {
+            "description": "Do you have serious difficulty walking or climbing stairs? 0 = no 1 = yes",
+            "type": "binary"
+        },
+        "Sex": {
+            "description": "0 = female 1 = male",
+            "type": "binary"
+        },
+        "Age": {
+            "description": "13-level age category (_AGEG5YR see codebook) 1 = 18-24 9 = 60-64 13 = 80 or older",
+            "type": "categorical"
+        },
+        "Education": {
+            "description": "Education level (EDUCA see codebook) scale 1-6 1 = Never attended school or only kindergarten 2 = Grades 1 through 8 (Elementary) 3 = Grades 9 through 11 (Some high school) 4 = Grade 12 or GED (High school graduate) 5 = College 1 year to 3 years (Some college or technical school) 6 = College 4 years or more (College graduate)",
+            "type": "categorical"
+        },
+        "Income": {
+            "description": "Income scale (INCOME2 see codebook) scale 1-8 1 = less than $10,000 5 = less than $35,000 8 = $75,000 or more",
+            "type": "categorical"
+        }
+    }
+}

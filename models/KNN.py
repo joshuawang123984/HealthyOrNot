@@ -2,6 +2,7 @@ import torch
 
 class KNN:
     def __init__(self, X_train, y_train, k=5):
+
         self.k = k
         self.X_train = torch.tensor(X_train.values if hasattr(X_train, 'values') else X_train, dtype=torch.float32)
         self.y_train = torch.tensor(y_train.values if hasattr(y_train, 'values') else y_train, dtype=torch.float32).squeeze()

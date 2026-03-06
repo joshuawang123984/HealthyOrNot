@@ -10,7 +10,7 @@ class LinearRegressionModel(nn.Module):
         return self.linear(x)
 
 class LinearRegression:
-    def __init__(self, X_train, y_train, alpha, epochs=1000, lr=0.01, lasso=False, ridge=False):
+    def __init__(self, X_train, y_train, alpha=0, epochs=1000, lr=0.01, lasso=False, ridge=False):
         input_dim = X_train.shape[1]
         self.model = LinearRegressionModel(input_dim)
         self.fit(X_train, y_train, alpha, epochs, lr, lasso, ridge)
@@ -31,10 +31,11 @@ class LinearRegression:
             optimizer.zero_grad()
 
             loss = loss_fn(self.model(X), y)
+            #exclude biases from regularization
             if lasso:
-                loss += alpha * sum(torch.sum(torch.abs(p)) for p in self.model.parameters())
+                loss += alpha * torch.stack([torch.sum(torch.abs(p)) for name, p in self.model.named_parameters() if 'weight' in name]).sum()
             elif ridge:
-                loss += alpha * sum(torch.sum((p ** 2) for p in self.model.parameters()))
+                loss += alpha * torch.stack([torch.sum(p ** 2) for name, p in self.model.named_parameters() if 'weight' in name]).sum()
 
             loss.backward()
             optimizer.step()
