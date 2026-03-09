@@ -23,6 +23,9 @@ def load_models():
     with open(os.path.join(BASE_DIR, 'data', 'csv_data.json'), 'r') as f:
         csv_data = json.load(f)
 
+    with open(os.path.join(BASE_DIR, 'data', 'csv_descriptions.json'), 'r') as f:
+        descriptions = json.load(f)
+
     for dataset in csv_data:
         save_path = os.path.join(save_dir, f"{dataset['name']}_model.pkl")
         print(f"Save path: {save_path}")
@@ -45,7 +48,8 @@ def load_models():
         trained_models[dataset['name']] = best_model
         dataset_metadata[dataset['name']] = {
             'features': list(X.columns),
-            'task': dataset['task']
+            'task': dataset['task'],
+            **descriptions.get(dataset['name'], {})
         }
 
 app = Flask(__name__)
