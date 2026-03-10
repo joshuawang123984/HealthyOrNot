@@ -19,7 +19,7 @@ function App() {
     <div>
       <h1>HealthyOrNot</h1>
       <DatasetSelector datasets={datasets} selected={selectedDataset} onSelect={setSelectedDataset} />
-      <FeatureForm features={selectedDataset ? datasets[selectedDataset].features : []} onSubmit={setPrediction} dataset={selectedDataset} />
+      <FeatureForm features={selectedDataset ? datasets[selectedDataset].features : []} featuresDesc={selectedDataset ? datasets[selectedDataset].features_desc : {}} onSubmit={setPrediction} dataset={selectedDataset} />
       <PredictionResult prediction={prediction} />
     </div>
   )
