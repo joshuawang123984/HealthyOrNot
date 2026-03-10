@@ -1,176 +1,182 @@
 {
     "liver_disorders": {
-        "mcv": {
-            "description": "mean corpuscular volume",
-            "type": "continuous"
-        },
-        "alkphos": {
-            "description": "alkaline phosphatase",
-            "type": "continuous"
-        },
-        "sgpt": {
-            "description": "alanine aminotransferase",
-            "type": "continuous"
-        },
-        "sgot": {
-            "description": "aspartate aminotransferase",
-            "type": "continuous"
-        },
-        "gammagt": {
-            "description": "gamma-glutamyl transpeptidase",
-            "type": "continuous"
+        "features_desc": {
+            "mcv": {
+                "description": "mean corpuscular volume",
+                "type": "continuous"
+            },
+            "alkphos": {
+                "description": "alkaline phosphatase",
+                "type": "continuous"
+            },
+            "sgpt": {
+                "description": "alanine aminotransferase",
+                "type": "continuous"
+            },
+            "sgot": {
+                "description": "aspartate aminotransferase",
+                "type": "continuous"
+            },
+            "gammagt": {
+                "description": "gamma-glutamyl transpeptidase",
+                "type": "continuous"
+            }
         }
     },
     "heart_disease": {
-        "age": {
-            "description": "age (years)",
-            "type": "integer"
-        },
-        "sex": {
-            "description": "gender",
-            "type": "categorical"
-        },
-        "cp": {
-            "description": "chest pain type",
-            "type": "categorical"
-        },
-        "trestbps": {
-            "description": "resting blood pressure on admission (mm Hg)",
-            "type": "integer"
-        },
-        "chol": {
-            "description": "serum cholesterol (mg/dl)",
-            "type": "integer"
-        },
-        "fbs": {
-            "description": "fasting blood sugar > 120 mg/dl",
-            "type": "categorical"
-        },
-        "restecg": {
-            "description": "resting electrocardiographic results",
-            "type": "categorical"
-        },
-        "thalach": {
-            "description": "maximum heart rate achieved",
-            "type": "integer"
-        },
-        "exang": {
-            "description": "exercise induced angina",
-            "type": "categorical"
-        },
-        "oldpeak": {
-            "description": "ST depression induced by exercise relative to rest",
-            "type": "continuous"
-        },
-        "slope": {
-            "description": "slope of peak exercise ST segment",
-            "type": "categorical"
-        },
-        "ca": {
-            "description": "number of major vessels (0-3) colored by fluoroscopy",
-            "type": "integer"
-        },
-        "thal": {
-            "description": "thalassemia",
-            "type": "categorical"
+        "features_desc": {
+            "age": {
+                "description": "age (years)",
+                "type": "integer"
+            },
+            "sex": {
+                "description": "gender",
+                "type": "categorical"
+            },
+            "cp": {
+                "description": "chest pain type",
+                "type": "categorical"
+            },
+            "trestbps": {
+                "description": "resting blood pressure on admission (mm Hg)",
+                "type": "integer"
+            },
+            "chol": {
+                "description": "serum cholesterol (mg/dl)",
+                "type": "integer"
+            },
+            "fbs": {
+                "description": "fasting blood sugar > 120 mg/dl",
+                "type": "categorical"
+            },
+            "restecg": {
+                "description": "resting electrocardiographic results",
+                "type": "categorical"
+            },
+            "thalach": {
+                "description": "maximum heart rate achieved",
+                "type": "integer"
+            },
+            "exang": {
+                "description": "exercise induced angina",
+                "type": "categorical"
+            },
+            "oldpeak": {
+                "description": "ST depression induced by exercise relative to rest",
+                "type": "continuous"
+            },
+            "slope": {
+                "description": "slope of peak exercise ST segment",
+                "type": "categorical"
+            },
+            "ca": {
+                "description": "number of major vessels (0-3) colored by fluoroscopy",
+                "type": "integer"
+            },
+            "thal": {
+                "description": "thalassemia",
+                "type": "categorical"
+            }
         }
     },
     "chronic_kidney_disease": {
-        "age": {
-            "description": "age (years)",
-            "type": "integer"
-        },
-        "bp": {
-            "description": "blood pressure (mm/Hg)",
-            "type": "integer"
-        },
-        "sg": {
-            "description": "specific gravity",
-            "type": "categorical"
-        },
-        "al": {
-            "description": "albumin",
-            "type": "categorical"
-        },
-        "su": {
-            "description": "sugar",
-            "type": "categorical"
-        },
-        "rbc": {
-            "description": "red blood cells",
-            "type": "binary"
-        },
-        "pc": {
-            "description": "pus cell",
-            "type": "binary"
-        },
-        "pcc": {
-            "description": "pus cell clumps",
-            "type": "binary"
-        },
-        "ba": {
-            "description": "bacteria",
-            "type": "binary"
-        },
-        "bgr": {
-            "description": "blood glucose random (mgs/dl)",
-            "type": "integer"
-        },
-        "bu": {
-            "description": "blood urea (mgs/dl)",
-            "type": "integer"
-        },
-        "sc": {
-            "description": "serum creatinine (mgs/dl)",
-            "type": "continuous"
-        },
-        "sod": {
-            "description": "sodium (mEq/L)",
-            "type": "continuous"
-        },
-        "pot": {
-            "description": "potassium (mEq/L)",
-            "type": "continuous"
-        },
-        "hemo": {
-            "description": "hemoglobin (gms)",
-            "type": "continuous"
-        },
-        "pcv": {
-            "description": "packed cell volume",
-            "type": "integer"
-        },
-        "wbcc": {
-            "description": "white blood cell count (cells/cmm)",
-            "type": "integer"
-        },
-        "rbcc": {
-            "description": "red blood cell count (millions/cmm)",
-            "type": "continuous"
-        },
-        "htn": {
-            "description": "hypertension",
-            "type": "binary"
-        },
-        "dm": {
-            "description": "diabetes mellitus",
-            "type": "binary"
-        },
-        "cad": {
-            "description": "coronary artery disease",
-            "type": "binary"
-        },
-        "appet": {
-            "description": "appetite",
-            "type": "binary"
-        },
-        "pe": {
-            "description": "pedal edema",
-            "type": "binary"
-        },
-        "ane": {
-            "description": "anemia",
-            "type": "binary"
+        "features_desc": {
+            "age": {
+                "description": "age (years)",
+                "type": "integer"
+            },
+            "bp": {
+                "description": "blood pressure (mm/Hg)",
+                "type": "integer"
+            },
+            "sg": {
+                "description": "specific gravity",
+                "type": "categorical"
+            },
+            "al": {
+                "description": "albumin",
+                "type": "categorical"
+            },
+            "su": {
+                "description": "sugar",
+                "type": "categorical"
+            },
+            "rbc": {
+                "description": "red blood cells",
+                "type": "binary"
+            },
+            "pc": {
+                "description": "pus cell",
+                "type": "binary"
+            },
+            "pcc": {
+                "description": "pus cell clumps",
+                "type": "binary"
+            },
+            "ba": {
+                "description": "bacteria",
+                "type": "binary"
+            },
+            "bgr": {
+                "description": "blood glucose random (mgs/dl)",
+                "type": "integer"
+            },
+            "bu": {
+                "description": "blood urea (mgs/dl)",
+                "type": "integer"
+            },
+            "sc": {
+                "description": "serum creatinine (mgs/dl)",
+                "type": "continuous"
+            },
+            "sod": {
+                "description": "sodium (mEq/L)",
+                "type": "continuous"
+            },
+            "pot": {
+                "description": "potassium (mEq/L)",
+                "type": "continuous"
+            },
+            "hemo": {
+                "description": "hemoglobin (gms)",
+                "type": "continuous"
+            },
+            "pcv": {
+                "description": "packed cell volume",
+                "type": "integer"
+            },
+            "wbcc": {
+                "description": "white blood cell count (cells/cmm)",
+                "type": "integer"
+            },
+            "rbcc": {
+                "description": "red blood cell count (millions/cmm)",
+                "type": "continuous"
+            },
+            "htn": {
+                "description": "hypertension",
+                "type": "binary"
+            },
+            "dm": {
+                "description": "diabetes mellitus",
+                "type": "binary"
+            },
+            "cad": {
+                "description": "coronary artery disease",
+                "type": "binary"
+            },
+            "appet": {
+                "description": "appetite",
+                "type": "binary"
+            },
+            "pe": {
+                "description": "pedal edema",
+                "type": "binary"
+            },
+            "ane": {
+                "description": "anemia",
+                "type": "binary"
+            }
         }
     }
 }

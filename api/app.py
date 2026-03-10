@@ -49,7 +49,8 @@ def load_models():
         dataset_metadata[dataset['name']] = {
             'features': list(X.columns),
             'task': dataset['task'],
-            **descriptions.get(dataset['name'], {})
+            'target_desc': descriptions.get(dataset['name'], {}).get('target_desc', ''),
+            'features_desc': descriptions.get(dataset['name'], {}).get('features_desc', {})
         }
 
 app = Flask(__name__)
