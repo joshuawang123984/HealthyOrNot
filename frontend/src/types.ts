@@ -7,6 +7,7 @@ export interface DatasetInfo {
     features: string[]
     task: string
     target_desc: string
+    target_map: { [key: number]: string }
     features_desc: {
         [key: string]: FeatureDesc
     }

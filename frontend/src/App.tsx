@@ -13,6 +13,7 @@ function App() {
     fetch('http://localhost:5001/datasets')
       .then(res => res.json())
       .then(data => setDatasets(data))
+
   }, [])
 
   return (
@@ -20,7 +21,7 @@ function App() {
       <h1>HealthyOrNot</h1>
       <DatasetSelector datasets={datasets} selected={selectedDataset} onSelect={setSelectedDataset} />
       <FeatureForm features={selectedDataset ? datasets[selectedDataset].features : []} featuresDesc={selectedDataset ? datasets[selectedDataset].features_desc : {}} onSubmit={setPrediction} dataset={selectedDataset} />
-      <PredictionResult prediction={prediction} task={selectedDataset ? datasets[selectedDataset].task : null} target_desc={selectedDataset ? datasets[selectedDataset].target_desc : null} />
+      <PredictionResult prediction={prediction} task={selectedDataset ? datasets[selectedDataset].task : null} target_desc={selectedDataset ? datasets[selectedDataset].target_desc : null} target_map={selectedDataset ? datasets[selectedDataset].target_map : {}} />
     </div>
   )
 }

@@ -2,16 +2,18 @@ interface Props {
     prediction: number | null
     task: string | null
     target_desc: string | null
+    target_map: { [key: number]: string }
 }
 
-export default function PredictionResult({ prediction, task, target_desc }: Props) {
+export default function PredictionResult({ prediction, task, target_desc, target_map }: Props) {
     if (prediction === null) return null
 
     if (task?.toLowerCase() === "classification") {
         return (
             <div>
-                {/* can be multiclass classification, create algo to take into account the entire string and extract correct terms depending on val */}
-                <h2>Result: {prediction === 1 ? 'At Risk' : 'Healthy'}</h2>
+                <h2>{target_desc}</h2>
+                <h2>{target_map[Math.round(prediction)]}</h2>
+
             </div>
         )
 
