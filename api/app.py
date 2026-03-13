@@ -16,6 +16,7 @@ import joblib
 trained_models = {}
 dataset_metadata = {}
 
+#can also impute with median and mean of column vals then remove this dataset from skip set.
 skip = {"chronic_kidney_disease"}
 
 def load_models(data_file, descriptions_file):
@@ -97,7 +98,16 @@ def predict():
     X = pd.DataFrame([features], columns=feature_names)
     prediction = model.predict(X)
     
-    return jsonify({'prediction': int(prediction[0])})
+    print(type(prediction))
+    if hasattr(prediction, "__len__"):
+        #if the nparray is 1 dimensional, access the element
+        try:
+            return jsonify({'prediction': int(prediction[0])})
+        #if the nparray is 0 dimensional:
+        except:
+            return jsonify({'prediction': int(prediction)})
+    
+    return jsonify({'prediction': int(prediction)})
 
 @app.route('/datasets', methods=['GET'])
 def datasets():
