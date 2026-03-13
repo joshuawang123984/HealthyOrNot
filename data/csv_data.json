@@ -4,6 +4,10 @@
         "path": "./data/cancer.csv",
         "task": "Classification",
         "target_col": "target",
+        "target_map": {
+            "0": "benign",
+            "1": "malignant"
+        },
         "target_desc": "0 for benign, 1 for malignant",
         "features": [
             "mean radius",
@@ -45,6 +49,11 @@
         "path": "./data/diabetes.csv",
         "task": "classification",
         "target_col": "Diabetes_012",
+        "target_map": {
+            "0": "no diabetes or only during pregnancy",
+            "1": "prediabetes",
+            "2": "diabetes"
+        },
         "target_desc": "0 is for no diabetes or only during pregnancy, 1 is for prediabetes, and 2 is for diabetes",
         "features": [
             "HighBP",

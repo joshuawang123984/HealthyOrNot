@@ -5,6 +5,7 @@
         "task": "regression",
         "target_col": "drinks",
         "target_desc": "number of half-pint equivalents of alcoholic beverages drunk per day",
+        "target_map": {},
         "discrete": "N",
         "features": [
             "mcv",
@@ -22,6 +23,7 @@
         "task": "regression",
         "target_col": "num",
         "target_desc": "diagnosis of heart disease",
+        "target_map": {},
         "discrete": "Y",
         "features": [
             "age",
@@ -46,6 +48,11 @@
         "id": 336,
         "task": "Classification",
         "target_col": "class",
+        "target_desc": "ckd or not ckd",
+        "target_map": {
+            "0": "ckd",
+            "1": "not ckd"
+        },
         "discrete": "Y",
         "features": [
             "age",

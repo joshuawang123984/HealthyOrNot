@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
 from src.__main__ import run_classification, run_regression
-from data.ToDataloader_numeric import csv_to_df, df_to_xy
+from data.ToDataloader_numeric import csv_to_df, df_to_xy, ucirepo_to_df
 
 import json
 import joblib
@@ -16,24 +16,48 @@ import joblib
 trained_models = {}
 dataset_metadata = {}
 
-def load_models():
+skip = {"chronic_kidney_disease"}
+
+def load_models(data_file, descriptions_file):
     save_dir = os.path.join(BASE_DIR, 'saved_models')
     os.makedirs(save_dir, exist_ok=True)
 
-    with open(os.path.join(BASE_DIR, 'data', 'csv_data.json'), 'r') as f:
+    with open(os.path.join(BASE_DIR, 'data', data_file), 'r') as f:
         csv_data = json.load(f)
 
-    with open(os.path.join(BASE_DIR, 'data', 'csv_descriptions.json'), 'r') as f:
+    with open(os.path.join(BASE_DIR, 'data', descriptions_file), 'r') as f:
         descriptions = json.load(f)
 
     for dataset in csv_data:
+        if dataset['name'] in skip:
+            continue
+
         save_path = os.path.join(save_dir, f"{dataset['name']}_model.pkl")
         print(f"Save path: {save_path}")
         print(f"Exists: {os.path.exists(save_path)}")
         
-        df = csv_to_df(dataset['path'])
-        df = df.sample(n=500, random_state=42)
-        X, y = df_to_xy(df, target_col=dataset['target_col'])
+        if 'path' in dataset:
+            df = csv_to_df(dataset['path'])
+            df = df.sample(n=min(500, len(df)), random_state=42)
+            X, y = df_to_xy(df, target_col=dataset['target_col'])
+            y = y.values.ravel() 
+        elif 'id' in dataset:
+            X, y = ucirepo_to_df(dataset['id'])
+    
+            # Convert categorical columns to numeric
+            X = X.apply(lambda col: pd.factorize(col)[0] if col.dtype == 'object' else col)
+            
+            mask = X.notna().all(axis=1)
+            X = X[mask]
+            y = y[mask]
+
+            X = X.sample(n=min(500, len(X)), random_state=42)
+            y = y.loc[X.index]
+            y = y.values.ravel()
+
+        else:
+            print(f"Skipping {dataset['name']}: no data source found")
+            continue
 
         if os.path.exists(save_path):
             best_model = joblib.load(save_path)
@@ -49,7 +73,8 @@ def load_models():
         dataset_metadata[dataset['name']] = {
             'features': list(X.columns),
             'task': dataset['task'],
-            'target_desc': descriptions.get(dataset['name'], {}).get('target_desc', ''),
+            'target_map': dataset["target_map"],
+            'target_desc': dataset["target_desc"],
             'features_desc': descriptions.get(dataset['name'], {}).get('features_desc', {})
         }
 
@@ -79,5 +104,10 @@ def datasets():
     return jsonify(dataset_metadata)
 
 if __name__ == '__main__':
-    load_models()
+    all_data = ["csv_data.json", "ucirepo_data.json"]
+    all_descriptions = ["csv_descriptions.json", "ucirepo_descriptions.json"]
+
+    for (data, description) in zip(all_data, all_descriptions):
+        load_models(data, description)
+    
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
