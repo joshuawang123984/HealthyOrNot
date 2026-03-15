@@ -2,23 +2,23 @@ import { useState } from 'react'
 import type { FeatureDesc } from '../types'
 
 interface Props {
-    features: string[]
-    featuresDesc: { [key: string]: FeatureDesc }
-    dataset: string
-    onSubmit: (prediction: number) => void
+    features: string[];
+    featuresDesc: { [key: string]: FeatureDesc };
+    dataset: string;
+    onSubmit: (prediction: number, featureImportance: { [key: string]: number }) => void;
 }
 
 export default function FeatureForm({ features, featuresDesc, dataset, onSubmit }: Props) {
-    const [values, setValues] = useState<{ [key: string]: string }>({})
-    const [loading, setLoading] = useState(false)
+    const [values, setValues] = useState<{ [key: string]: string }>({});
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (feature: string, value: string) => {
-        setValues(prev => ({ ...prev, [feature]: value }))
+        setValues(prev => ({ ...prev, [feature]: value }));
     }
 
     const handleSubmit = () => {
-        setLoading(true)
-        const featureValues = features.map(f => parseFloat(values[f] || '0'))
+        setLoading(true);
+        const featureValues = features.map(f => parseFloat(values[f] || '0'));
 
         fetch('http://localhost:5001/predict', {
             method: 'POST',
@@ -26,12 +26,12 @@ export default function FeatureForm({ features, featuresDesc, dataset, onSubmit 
             body: JSON.stringify({ dataset, features: featureValues })
         })
             .then(res => res.json())
-            .then(data => { onSubmit(data.prediction); setLoading(false) })
-            .catch(() => setLoading(false))
+            .then(data => { onSubmit(data.prediction, data.feature_importance); setLoading(false) })
+            .catch(() => setLoading(false));
     }
 
-    const filled = features.filter(f => values[f] !== undefined && values[f] !== '').length
-    const progress = features.length > 0 ? (filled / features.length) * 100 : 0
+    const filled = features.filter(f => values[f] !== undefined && values[f] !== '').length;
+    const progress = features.length > 0 ? (filled / features.length) * 100 : 0;
 
     return (
         <div className="flex flex-col gap-5">

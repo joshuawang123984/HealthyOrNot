@@ -1,9 +1,9 @@
 import type { Datasets } from '../types.ts'
 
 interface Props {
-    datasets: Datasets
-    selected: string
-    onSelect: (name: string) => void
+    datasets: Datasets;
+    selected: string;
+    onSelect: (name: string) => void;
 }
 
 export default function DatasetSelector({ datasets, selected, onSelect }: Props) {

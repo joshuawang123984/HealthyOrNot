@@ -97,17 +97,33 @@ def predict():
     
     X = pd.DataFrame([features], columns=feature_names)
     prediction = model.predict(X)
+
+    if hasattr(model, 'feature_importances_'):         # tree-based models
+        importances = model.feature_importances_
+    elif hasattr(model, 'coef_'):                      # linear models
+        importances = abs(model.coef_).flatten()
+    else:
+        importances = [1] * len(feature_names)
+
+    feature_importance = dict(zip(feature_names, importances))
+    print(feature_importance)
     
     print(type(prediction))
     if hasattr(prediction, "__len__"):
         #if the nparray is 1 dimensional, access the element
         try:
-            return jsonify({'prediction': int(prediction[0])})
+            return jsonify({
+            'prediction': int(prediction[0]),
+            'feature_importance': feature_importance
+        })
         #if the nparray is 0 dimensional:
         except:
-            return jsonify({'prediction': int(prediction)})
-    
-    return jsonify({'prediction': int(prediction)})
+            return jsonify({
+            'prediction': int(prediction),
+            'feature_importance': feature_importance
+        })
+    print("prediction has no len prop")
+    return jsonify({'prediction': int(prediction)}, dict())
 
 @app.route('/datasets', methods=['GET'])
 def datasets():

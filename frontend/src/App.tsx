@@ -1,23 +1,24 @@
-import { useState, useEffect } from 'react'
-import type { Datasets } from './types'
-import DatasetSelector from './components/DatasetSelector'
-import FeatureForm from './components/FeatureForm'
-import PredictionResult from './components/PredictionResult'
+import { useState, useEffect } from 'react';
+import type { Datasets } from './types';
+import DatasetSelector from './components/DatasetSelector';
+import FeatureForm from './components/FeatureForm';
+import PredictionResult from './components/PredictionResult';
 
 function App() {
-  const [datasets, setDatasets] = useState<Datasets>({})
-  const [selectedDataset, setSelectedDataset] = useState<string>('')
-  const [prediction, setPrediction] = useState<number | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [datasets, setDatasets] = useState<Datasets>({});
+  const [selectedDataset, setSelectedDataset] = useState<string>('');
+  const [prediction, setPrediction] = useState<number | null>(null);
+  const [featureImportance, setFeatureImportance] = useState<{ [key: string]: number }>({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch('http://localhost:5001/datasets')
       .then(res => res.json())
       .then(data => { setDatasets(data); setLoading(false) })
-      .catch(() => setLoading(false))
+      .catch(() => setLoading(false));
   }, [])
 
-  const dataset = selectedDataset ? datasets[selectedDataset] : null
+  const dataset = selectedDataset ? datasets[selectedDataset] : null;
 
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100 flex flex-col">
@@ -84,6 +85,7 @@ function App() {
                   task={dataset?.task ?? null}
                   target_desc={dataset?.target_desc ?? null}
                   target_map={dataset?.target_map ?? {}}
+                  featureImportance={featureImportance}
                 />
               )}
 
@@ -95,7 +97,10 @@ function App() {
                 <FeatureForm
                   features={dataset?.features ?? []}
                   featuresDesc={dataset?.features_desc ?? {}}
-                  onSubmit={setPrediction}
+                  onSubmit={(result, importance) => {
+                    setPrediction(result)
+                    setFeatureImportance(importance)
+                  }}
                   dataset={selectedDataset}
                 />
               </div>
@@ -107,4 +112,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

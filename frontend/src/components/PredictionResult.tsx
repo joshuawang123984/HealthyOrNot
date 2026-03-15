@@ -1,20 +1,24 @@
 interface Props {
-    prediction: number | null
-    task: string | null
-    target_desc: string | null
-    target_map: { [key: number]: string }
+    prediction: number | null;
+    task: string | null;
+    target_desc: string | null;
+    target_map: { [key: number]: string };
+    featureImportance: { [key: string]: number };
 }
 
-export default function PredictionResult({ prediction, task, target_desc, target_map }: Props) {
-    if (prediction === null) return null
+export default function PredictionResult({ prediction, task, target_desc, target_map, featureImportance }: Props) {
+    if (prediction === null) return null;
+
+    const sortedFeatures = Object.entries(featureImportance)
+        .sort(([, a], [, b]) => b - a);
 
     if (task?.toLowerCase() === 'classification') {
-        const label = target_map[Math.round(prediction)]
+        const label = target_map[Math.round(prediction)];
         const isHealthy = label?.toLowerCase().includes('healthy') ||
             label?.toLowerCase().includes('negative') ||
             label?.toLowerCase().includes('no') ||
             label?.toLowerCase().includes('benign') ||
-            prediction === 0
+            prediction === 0;
 
         return (
             <div className={`rounded-lg border p-5 flex items-start gap-4 animate-[fadeIn_0.3s_ease]
@@ -37,6 +41,16 @@ export default function PredictionResult({ prediction, task, target_desc, target
                         <p className="text-xs text-gray-500 mt-1">{target_desc}</p>
                     )}
                 </div>
+                <div>
+                    <h3>Feature Contributions</h3>
+                    {sortedFeatures.map(([feature, importance]) => (
+                        <div key={feature}>
+                            <span>{feature}</span>
+                            <div style={{ width: `${(importance / sortedFeatures[0][1]) * 100}%`, background: 'blue', height: '10px' }} />
+                            <span>{(importance * 100).toFixed(1)}%</span>
+                        </div>
+                    ))}
+                </div>
             </div>
         )
 
@@ -52,6 +66,16 @@ export default function PredictionResult({ prediction, task, target_desc, target
                     {target_desc && (
                         <p className="text-xs text-gray-500 mt-1">{target_desc}</p>
                     )}
+                </div>
+                <div>
+                    <h3>Feature Contributions</h3>
+                    {sortedFeatures.map(([feature, importance]) => (
+                        <div key={feature}>
+                            <span>{feature}</span>
+                            <div style={{ width: `${(importance / sortedFeatures[0][1]) * 100}%`, background: 'blue', height: '10px' }} />
+                            <span>{(importance * 100).toFixed(1)}%</span>
+                        </div>
+                    ))}
                 </div>
             </div>
         )
