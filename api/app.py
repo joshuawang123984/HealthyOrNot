@@ -123,7 +123,7 @@ def predict():
             'feature_importance': feature_importance
         })
     print("prediction has no len prop")
-    return jsonify({'prediction': int(prediction)}, dict())
+    return jsonify({'prediction': int(prediction), 'feature_importance': dict()})
 
 @app.route('/datasets', methods=['GET'])
 def datasets():

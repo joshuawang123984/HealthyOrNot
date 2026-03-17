@@ -12,6 +12,17 @@ export default function PredictionResult({ prediction, task, target_desc, target
     const sortedFeatures = Object.entries(featureImportance)
         .sort(([, a], [, b]) => b - a);
 
+    const featuresHTML = <div>
+        <h3>Feature Contributions</h3>
+        {sortedFeatures.map(([feature, importance]) => (
+            <div key={feature}>
+                <span>{feature}</span>
+                <div style={{ width: `${(importance / sortedFeatures[0][1]) * 100}%`, background: 'blue', height: '10px' }} />
+                <span>{(importance * 100).toFixed(1)}%</span>
+            </div>
+        ))}
+    </div>;
+
     if (task?.toLowerCase() === 'classification') {
         const label = target_map[Math.round(prediction)];
         const isHealthy = label?.toLowerCase().includes('healthy') ||
@@ -41,16 +52,7 @@ export default function PredictionResult({ prediction, task, target_desc, target
                         <p className="text-xs text-gray-500 mt-1">{target_desc}</p>
                     )}
                 </div>
-                <div>
-                    <h3>Feature Contributions</h3>
-                    {sortedFeatures.map(([feature, importance]) => (
-                        <div key={feature}>
-                            <span>{feature}</span>
-                            <div style={{ width: `${(importance / sortedFeatures[0][1]) * 100}%`, background: 'blue', height: '10px' }} />
-                            <span>{(importance * 100).toFixed(1)}%</span>
-                        </div>
-                    ))}
-                </div>
+                {featuresHTML}
             </div>
         )
 
@@ -67,16 +69,7 @@ export default function PredictionResult({ prediction, task, target_desc, target
                         <p className="text-xs text-gray-500 mt-1">{target_desc}</p>
                     )}
                 </div>
-                <div>
-                    <h3>Feature Contributions</h3>
-                    {sortedFeatures.map(([feature, importance]) => (
-                        <div key={feature}>
-                            <span>{feature}</span>
-                            <div style={{ width: `${(importance / sortedFeatures[0][1]) * 100}%`, background: 'blue', height: '10px' }} />
-                            <span>{(importance * 100).toFixed(1)}%</span>
-                        </div>
-                    ))}
-                </div>
+                {featuresHTML}
             </div>
         )
 
