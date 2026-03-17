@@ -11,30 +11,33 @@ HealthyOrNot aims to change that.
 
 HealthyOrNot analyzes a user’s bloodwork results to determine whether key health indicators fall within healthy reference ranges. Using a supervised machine learning classification model, the system evaluates biomarkers (such as glucose levels, cholesterol, blood pressure indicators, etc) and predicts whether the results suggest a healthy or at risk status.
 
-The application then processes the results to identify the most significant out of the ordinary markers. These markers are cleaned, categorized, and ranked based on severity and frequency of abnormality. The top five potential health concerns are displayed to the user.
+The application then processes the results to identify the most significant out of the ordinary markers. These markers are cleaned, categorized, and ranked based on severity and frequency of abnormality. 
 
 This provides users with an accessible first step toward understanding their bloodwork before consulting a medical professional.
 
-⚙️ How we built it
-We built the frontend using React for dynamic UI rendering and Tailwind CSS and Bootstrap for responsive styling and layout.
-The backend was developed using Flask, which handled API requests, processed user bloodwork input, and ran the machine learning model. The model was trained using supervised learning techniques to classify whether biomarkers fall within healthy reference ranges.
+⚙️ How I built it
+I built the frontend using React for dynamic UI rendering and Tailwind CSS featuring a dataset selector, a dynamic biomarker input form with a fill progress tracker, and a results panel that displays the prediction alongside a ranked feature for importance breakdown
 
-We implemented a preprocessing pipeline that:
+The backend was built with Flask and uses two endpoints:
+- `GET /datasets` — returns available datasets and their metadata
+- `POST /predict` — runs inference and returns the prediction with per-feature importances
 
--- Normalized numerical health indicators
+On startup, the backend trains and caches a best-fit model for each dataset by benchmarking multiple algorithms (linear models, decision trees, random forests, SVMs, KNN) using cross-validation and selecting the top performer. Models are persisted with **joblib** to avoid retraining on subsequent runs.
 
--- Compared values against standard medical reference ranges
+## ML Models evaluated per dataset
 
--- Identified out-of-range markers
+- Linear / Ridge / Lasso Regression
+- Decision Tree
+- Random Forest
+- Support Vector Machine (SVC / SVR)
+- K-Nearest Neighbors
 
--- Ranked abnormalities based on severity
+## Running locally
+```bash
+# Backend
+python api/app.py
 
-The backend then returned structured health insights to the frontend, where results were displayed in an interactive and user-friendly format.
-
-## 🔭 What's next for HealthyOrNot
-
-HealthyOrNot would like to be able to produce graphs that display significant health indicators and the statistics of where one should lie. The graph should also include the individual persons own health indicator statistics.
-
-
-confidence intervals
-correlation analysis
+# Frontend
+npm install
+npm run dev
+```
